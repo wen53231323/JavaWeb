@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!-- v-if、v-else、v-else-if -->
+<!--条件性的渲染某元素，判定为true时渲染，否则不渲染-->
+
+<!-- v-show -->
+<!-- 根据条件展示某元素，区别在于切换的是display属性的值 -->
+
+<div id="app">
+    <input v-model="count">
+    <hr>
+    <div v-if="count == 1">此时为1</div>
+    <div v-else-if="count == 2">此时为2</div>
+    <div v-else>默认</div>
+    <div v-show="count == 3">v-show默认不可见（display），满足条件则展示</div>
+</div>
+
+
+<script>
+    // 创建Vue核心对象
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                username: "",
+                url: "https://www.baidu.com",
+                count: 1
+            }
+        },
+        methods: {
+            show() {
+                alert("我被点了...");
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>

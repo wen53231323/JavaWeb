@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- property标签用来表示属性-->
+<!-- name表示Service_implements实现类中使用的属性名-->
+<!-- ref表示引用其他bean的id值 -->
+<beans>
+    <bean id="fruitDAO" class="DAO.DAO_implements"/>
+
+    <bean id="fruit_service" class="service.Service_implements">
+        <property name="fruitDAO" ref="fruitDAO"/>
+    </bean>
+
+    <bean id="fruit" class="Controllers.FruitController">
+        <property name="fruit_service" ref="fruit_service"/>
+    </bean>
+</beans>

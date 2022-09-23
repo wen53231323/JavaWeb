@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!--&lt;!&ndash; =======================配置Filter======================= &ndash;&gt;-->
+    <!---->
+    <!--<filter>-->
+        <!--&lt;!&ndash; 配置Filter的名称 &ndash;&gt;-->
+        <!--<filter-name>Filter_1</filter-name>-->
+
+        <!--&lt;!&ndash; 配置Filter的全类名，便于Servlet容器创建Filter对象 &ndash;&gt;-->
+        <!--<filter-class>filters.Filter_1</filter-class>-->
+    <!--</filter>-->
+
+    <!--&lt;!&ndash; 配置Filter要拦截的目标资源 &ndash;&gt;-->
+    <!--<filter-mapping>-->
+        <!--&lt;!&ndash; 指定这个mapping对应的Filter名称 &ndash;&gt;-->
+        <!--<filter-name>Filter_1</filter-name>-->
+
+        <!--&lt;!&ndash; 通过请求地址模式来设置要拦截的资源 &ndash;&gt;-->
+        <!--<url-pattern>/过滤器链.do</url-pattern>-->
+    <!--</filter-mapping>-->
+
+    <!--<listener>-->
+        <!--<listener-class>com.atguigu.listener.MyServletContextListener</listener-class>-->
+    <!--</listener>-->
+
+
+</web-app>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 对应mapper接口的全类名 -->
+<mapper namespace="mapper.FruitMapper">
+    <!--
+        查询功能的标签必须设置resultType或resultMap，且两个属性不能同时存在
+        resultType：设置默认的映射关系，设置结果类型，即查询的数据要装换为的java类型
+        resultMap：设置自定义的映射关系，处理多对一或一对多的映射关系
+    -->
+
+    <!--获取所有的库存列表信息-->
+    <!--List<Fruit> getAllFruitList();-->
+    <select id="getAllFruitList" resultType="Fruit">
+      select * from t_fruit
+    </select>
+
+    <!--查询库存总记录条数-->
+    <!--int getFruitCount(String keyword);-->
+    <select id="getFruitCount" resultType="int">
+       select count(*) from t_fruit
+        <where>
+            <if test="keyword != null and keyword !=''">
+                name like #{keyword} or remark like #{keyword}
+            </if>
+        </where>
+
+    </select>
+
+    <!--获取 指定页码 上的库存列表信息 , 每页显示5条-->
+    <!--List<Fruit> getFruitList(String keyword , Integer pageNo);-->
+    <select id="getFruitList" resultType="Fruit">
+      select * from t_fruit
+        <where>
+            <if test="keyword != null and keyword != '' and pageNo != null and pageNo !='' ">
+                name like "%"#{keyword}"%" or  "%"#{keyword}"%" limit ${pageNo - 1 } , 5
+            </if>
+        </where>
+    </select>
+
+    <!--根据id获取特定的水果库存信息-->
+    <!--Fruit getFruitById(Integer fid);-->
+    <select id="getFruitById" resultType="Fruit">
+      select * from t_fruit where id = #{id}
+    </select>
+
+
+    <!--修改指定的库存记录-->
+    <!--void updateFruit(Fruit fruit);-->
+    <update id="updateFruit">
+      update t_fruit set
+      name = #{name} , price = #{price} , count = #{count} , remark = #{remark}
+      where id = #{id}
+    </update>
+
+    <!--根据fid删除指定的库存记录-->
+    <!--void delFruit(Integer fid);-->
+    <delete id="delFruit">
+      delete from t_fruit where id = #{id}
+    </delete>
+
+    <!--添加新库存记录-->
+    <!--void addFruit(Fruit fruit);-->
+    <insert id="addFruit" useGeneratedKeys="true" keyProperty="id">
+      insert into t_fruit values (null,#{name},#{price},#{count},#{remark})
+    </insert>
+
+
+</mapper>

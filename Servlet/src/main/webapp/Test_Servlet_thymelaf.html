@@ -1,0 +1,34 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>th:text</p>
+<!--th:text作用：Thymeleaf引擎根据th:text属性指定的『标签体新值』去替换『标签体原始值』-->
+<p th:text="标签体新值">标签体原始值</p>
+<br>
+
+<p>解析URL地址</p>
+<p th:text="@{/aaa/bbb/ccc}">标签体原始值</p>
+<br>
+
+<p>转义</p>
+<p>有转义效果：[[${test}]]</p>
+<p>无转义效果：[(${test})]</p>
+<br>
+
+<p>----------------------操作request请求域----------------------</p>
+<p th:text="${key_1}">操作request请求域</p>
+<br>
+<p>----------------------操作session会话域----------------------</p>
+<p th:text="${session.key_2}">操作request请求域</p>
+<br>
+<p>----------------------操作ServletContext应用域----------------------</p>
+<p th:text="${application.key_3}">操作ServletContext应用域</p>
+<br>
+
+
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+
+<form action="/fruit.do" method="post">
+    <!-- 隐藏域，用于区分是什么操作 -->
+    <input type="hidden" name="operate" value="add"/>
+    名称：<input type="text" name="name"/><br>
+    单价：<input type="text" name="price"/><br>
+    库存：<input type="text" name="count"/><br>
+    备注：<input type="text" name="remark"/><br>
+    <input type="submit" value="添加"/>
+</form>
+
+</body>
+</html>

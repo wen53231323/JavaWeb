@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--
+    MyBatis核心配置文件中，标签的顺序：
+    properties?,settings?,typeAliases?,typeHandlers?,
+    objectFactory?,objectWrapperFactory?,reflectorFactory?,
+    plugins?,environments?,databaseIdProvider?,mapper?
+    -->
+
+    <!-- ========================================引入properties文件===============================================-->
+    <!-- 引入后可以在文件中使用${key}的方式，访问properties文件中的value -->
+    <properties resource="jdbc.properties"/>
+
+
+    <!-- ===================================全局配置信息================================== -->
+    <settings>
+        <!-- 自动将下划线映射为驼峰 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- =========================================设置类型别名========================================-->
+    <typeAliases>
+        <!-- package标签：以包为单位，将包下所有的类型设置默认的类型别名，即类名且不区分大小写-->
+        <package name="pojo"/>
+    </typeAliases>
+
+    <!-- =========================================设置分页插件========================================= -->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
+    <!-- =======================================配置多个连接数据库的环境====================================== -->
+    <!-- default属性：设置默认使用的环境的id-->
+    <environments default="development">
+        <!-- environment标签：配置某个具体的环境 -->
+        <!-- id属性：表示连接数据库的环境的唯一标识，不能重复-->
+        <environment id="development">
+            <!-- transactionManager标签：设置事务管理方式 -->
+            <!-- type属性：type="JDBC|MANAGED"-->
+            <!-- type="JDBC"：表示当前环境中，执行SQL时，使用的是JDBC中原生的事务管理方式，事务的提交或回滚需要手动处理-->
+            <!-- type="MANAGED"：被管理，例如被Spring管理 -->
+            <transactionManager type="JDBC"/>
+
+            <!-- dataSource标签：配置数据源-->
+            <!-- type="POOLED|UNPOOLED|JNDI"：设置数据源的类型-->
+            <!-- type="POOLED"：表示使用数据库连接池缓存数据库连接-->
+            <!-- type="UNPOOLED"：表示不使用数据库连接池-->
+            <!-- type="JNDI"：表示使用上下文中的数据源-->
+            <dataSource type="POOLED">
+                <!--设置连接数据库的驱动-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <!--设置连接数据库的连接地址-->
+                <property name="url" value="${jdbc.url}"/>
+                <!--设置连接数据库的用户名-->
+                <property name="username" value="${jdbc.username}"/>
+                <!--设置连接数据库的密码-->
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- ===============================================引入映射文件===============================================-->
+    <mappers>
+        <!--引入单个映射文件-->
+        <!--<mapper resource="mapper/UserMapper.xml"/>-->
+
+        <!-- 以包为单位引入映射文件 -->
+        <!--要求1：mapper接口所在的包，要和映射文件所在的包一致-->
+        <!--要求2：mapper接口的名字，要和映射文件的名字一致-->
+        <package name="mapper"/>
+    </mappers>
+</configuration>

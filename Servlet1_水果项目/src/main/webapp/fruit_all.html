@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <script language="JavaScript" src="js/index.js"></script>
+    <style>
+        .test{
+            width:60%;
+            margin-left:20%;
+            padding-top:4px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 提交信息到当前路由 -->
+<form th:action="@{/search}" method="post" class="test">
+    <input type="text" name="keyword" th:value="${session.keyword}"/>
+    <input type="submit" value="查询水果" class="btn"/>
+</form>
+
+<div class="test">
+    <a th:href="@{/fruit_add.html}">添加新库存记录</a>
+</div>
+
+<table border="1" cellpadding="0" cellspacing="0" class="test">
+    <tr>
+        <th colspan="6">欢迎使用水果库存后台管理系统</th>
+    </tr>
+    <tr>
+        <th>序号</th>
+        <th>名称</th>
+        <th>价格</th>
+        <th>库存</th>
+        <!-- 跳转到添加用户页面 -->
+        <th>操作 </th>
+    </tr>
+
+    <!-- 如果没有数据库中没有数据则显示空 -->
+    <tr th:if="${#lists.isEmpty(session.fruitList)}">
+        <td colspan="4">对不起，库存为空！</td>
+    </tr>
+
+    <!-- 如果数据库有数据，则遍历fruitList，取出数据展示 -->
+    <tr th:unless="${#lists.isEmpty(session.fruitList)}" th:each="fruit ,status: ${session.fruitList}">
+        <td th:text="${status.count}"></td>
+        <td><a th:text="${fruit.name}">苹果</a></td>
+        <td th:text="${fruit.price}">5</td>
+        <td th:text="${fruit.count}">20</td>
+
+        <td>
+            <!-- 如果点击删除就触发点击事件delFruit，并传递id -->
+            <img src="imgs/del.jpg" style="width: 30px" th:onclick="|delFruit(${fruit.id})|"/>
+            <a th:href="@{/toupdate(id=${fruit.id})}">修改</a>
+        </td>
+    </tr>
+</table>
+
+<div class="test">
+    <!-- disabled="true"表示按钮不可用  -->
+    <input type="button" value="首  页" class="btn" th:onclick="|page(1)|" th:disabled="${session.pageNo==1}"/>
+    <input type="button" value="上一页" class="btn" th:onclick="|page(${session.pageNo-1})|"
+           th:disabled="${session.pageNo == 1}"/>
+    <input type="button" value="下一页" class="btn" th:onclick="|page(${session.pageNo+1})|"
+           th:disabled="${session.pageNo == session.pageCount}"/>
+    <input type="button" value="尾  页" class="btn" th:onclick="|page(${session.pageCount})|"
+           th:disabled="${session.pageNo == session.pageCount}"/>
+</div>
+</body>
+</html>
+
+<script>
+    // 获取id并传递到指定路由
+    function delFruit(id) {
+        if (confirm('是否确认删除？')) {
+            // 弹窗提示，当确认删除后走del.do路由
+            window.location.href = '/del?id=' + id;
+        }
+    }
+
+    // 获取页码数并传递到index路由
+    function page(pageNo) {
+        window.location.href = "/index?pageNo=" + pageNo;
+    }
+</script>

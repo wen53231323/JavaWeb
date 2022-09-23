@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/edit.css">
+</head>
+<body>
+
+<!-- th:object="${fruit} ：加了这句表示内部使用的属性都来自fruit-->
+<form th:action="@{/update}" method="post" th:object="${fruitbyid}">
+    <!-- 隐藏域： 功能类似于文本框 ， 它的值会随着表单的发送也会发送给服务器，但是界面上用户看不到 -->
+    <input type="hidden" name="id" th:value="*{id}"/>
+    名称：<input type="text" name="name" th:value="*{name}"/><br>
+    单价：<input type="text" name="price" th:value="*{price}"/><br>
+    库存：<input type="text" name="count" th:value="*{count}"/><br>
+    备注：<input type="text" name="remark" th:value="*{remark}"/><br>
+    <input type="submit" value="修改"/>
+</form>
+</body>
+</html>

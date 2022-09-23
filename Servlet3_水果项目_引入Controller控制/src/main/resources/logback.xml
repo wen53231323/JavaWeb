@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <!-- CONSOLE ：表示当前的日志信息是可以输出到控制台的。-->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%level]  %cyan([%thread]) %boldGreen(%logger{15}) - %msg %n</pattern>
+        </encoder>
+    </appender>
+    <!-- 指定日志输出的位置 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- 日志输出的格式 -->
+            <!-- 按照顺序分别是：时间、日志级别、线程名称、打印日志的类、日志主体内容、换行 -->
+            <pattern>[%d{HH:mm:ss.SSS}] [%-5level] [%thread] [%logger] [%msg]%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 指定任何一个日志级别都只打印当前级别和后面级别的日志。 -->
+    <!-- 设置全局日志级别。日志级别按顺序分别是：DEBUG、INFO、WARN、ERROR -->
+    <!-- level：用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF， 默认debug-->
+    <!-- <root>可以包含零个或多个<appender-ref>元素，标识这个输出位置将会被本日志级别控制。-->
+    <root level="DEBUG">
+        <!-- 指定打印日志的appender，这里通过“Console”引用了前面配置的appender -->
+        <appender-ref ref="Console"/>
+        <!-- 指定打印日志的appender，这里通过“STDOUT”引用了前面配置的appender -->
+        <!--<appender-ref ref="STDOUT" />-->
+    </root>
+
+    <!-- 根据特殊需求指定局部日志级别 -->
+    <logger name="mapper" level="DEBUG" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+</configuration>

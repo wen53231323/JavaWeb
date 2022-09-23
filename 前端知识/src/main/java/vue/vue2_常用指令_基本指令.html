@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<!-- v-model:给表单项标签绑定模型数据，实现双向绑定效果-->
+<!-- v-bind: 为HTML标签绑定属性值，如设置href、css样式等-->
+<!-- v-on：为HTML绑定事件-->
+<div id="app">
+    <p>v-model和v-bind的使用</p>
+    <!-- v-model的使用 -->
+    <!-- 如果在输入框改变链接，则a标签的链接会随之改变 -->
+    <input v-model="url">
+    <!-- v-bind的使用 -->
+    <a v-bind:href="url">链接</a>
+    <!-- v-bind的简化使用 -->
+    <a :href="url">链接</a>
+
+    <hr>
+
+    <p>v-on的使用</p>
+    <!-- v-on的使用：绑定单击事件 -->
+    <input type="button" value="按钮" v-on:click="show()">
+    <!-- v-on的简化使用：绑定单击事件 -->
+    <input type="button" value="按钮" @click="show()">
+</div>
+
+
+<script>
+    // 创建Vue核心对象
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                username: "",
+                url: "https://www.baidu.com"
+            }
+        },
+        methods: {
+            show() {
+                alert("我被点了...");
+            }
+        }
+    });
+</script>
+
+
+</body>
+</html>

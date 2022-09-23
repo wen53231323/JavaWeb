@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         id="WebApp_ID" version="3.1">
+    <!-- Web应用的初始化参数，相当于全局的，任何都可以用 -->
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>oracle.jdbc.DriverManager</param-value>
+    </context-param>
+    <context-param>
+        <param-name>test</param-name>
+        <param-value>oracle.jdbc.DriverManager</param-value>
+    </context-param>
+
+
+    <!-- 配置和映射Servelt ,只有当前helloServelt能获取 -->
+    <servlet>
+        <!-- 注册的名字 -->
+        <servlet-name>Servlet_9_获取初始化参数</servlet-name>
+        <!-- 类的全类名 -->
+        <servlet-class>Servlet.Servlet_9_获取初始化参数</servlet-class>
+
+        <!-- 配置servlet的初始化参数，此节点必须放在 load-on-startup节点之前 -->
+        <init-param>
+            <param-name>key_1</param-name>
+            <param-value>value_1</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>key_2</param-name>
+            <param-value>value_2</param-value>
+        </init-param>
+
+        <!-- 可指定servlet被创建的时机 ：为负数则在第一次访问时创建，为0或正数则在servlet加载进servlet容器时创建，且越小先被创建 -->
+        <load-on-startup>1</load-on-startup>
+
+    </servlet>
+
+    <!-- 映射 -->
+    <servlet-mapping>
+        <!-- 与 servlet 节点的servlet-name节点的名字保持一致 -->
+        <servlet-name>Servlet_9_获取初始化参数</servlet-name>
+        <!-- 映射具体的访问路径 /代表访问当前Web应用的根目录 -->
+        <url-pattern>/Servlet_9_获取初始化参数</url-pattern>
+    </servlet-mapping>
+
+    <!--
+    1. 用户发请求，action = "add_user"
+    2. 项目中，web.xml中找到url-pattern = /add_user
+    3. 找servlet-name = ServeltTest
+    4. 找servlet-mapping中servlet-name一致的注册的名字
+    5. 根据注册名找到类的地址servlet-class -> Servlet.Servlet_1_表单提交
+    6. 用户发送的是post请求（method=post）， 因此 tomcat会执行AddServlet中的doPost方法
+    -->
+</web-app>

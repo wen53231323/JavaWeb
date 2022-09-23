@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<beans>
+    <!-- 作用：将来servletpath中涉及的名字对应的是fruit，那么就要FruitController这个类来处理 -->
+    <!-- 也可以添加其他Controller控制器，例如UserController，涉及用户的增删改查 -->
+    <bean id="fruit" class="Controllers.FruitController"/>
+
+
+    <bean id="fruitDAO" class="DAO.DAO_implements"/>
+    <bean id="fruitService" class="service.impl.Service_implements"/>
+
+</beans>
