@@ -27,7 +27,6 @@ public class Response响应字符数据 extends HttpServlet {
         writer.write("<h1>你好，response</h1>");
         //细节：流不需要关闭
         //一次请求响应结束后，response对象就会被销毁掉，所以不要手动关闭流。
-
     }
 
     @Override
